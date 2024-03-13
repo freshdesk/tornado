@@ -104,7 +104,7 @@ Backwards-incompatible changes
 * Subprotocols (i.e. the ``Sec-WebSocket-Protocol`` header) are now supported;
   see the `.WebSocketHandler.select_subprotocol` method for details.
 * ``.WebSocketHandler.get_websocket_scheme`` can be used to select the
-  appropriate url scheme (``ws://`` or ``wss://``) in cases where
+  appropriate url scheme (``websocket`` or ``websocket secure``) in cases where
   ``HTTPRequest.protocol`` is not set correctly.
 
 Other modules
