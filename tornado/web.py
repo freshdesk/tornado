@@ -3272,15 +3272,7 @@ REDIS_CLIENT = redis.from_url(url=environ.get('REDIS_BROKER_URL'))
 
 
 def allowed_ip(ip):
-    try:
-        exists = REDIS_CLIENT.sismember("APP_ALLOWED_IPS", ip)
-    except redis.exceptions.ConnectionError as CE:
-        raise CE
-    except redis.exceptions.TimeoutError as TOE:
-        raise TOE
-    except Exception as E:
-        raise Exception(f'Redis raised exception: {str(E)}')
-    return exists
+    return REDIS_CLIENT.sismember("APP_ALLOWED_IPS", ip)
 
 
 def authenticated(
