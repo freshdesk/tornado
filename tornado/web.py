@@ -3293,6 +3293,7 @@ def authenticated(
     def wrapper(  # type: ignore
         self: RequestHandler, *args, **kwargs
     ) -> Optional[Awaitable[None]]:
+        print("*"*50, self.request.headers, self.request.remote_ip, self.request.__dict__)
         if not allowed_ip(self.request.remote_ip):
             raise HTTPError(403)
 
