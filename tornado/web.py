@@ -3293,7 +3293,8 @@ def authenticated(
     def wrapper(  # type: ignore
         self: RequestHandler, *args, **kwargs
     ) -> Optional[Awaitable[None]]:
-        if not allowed_ip(self.request.remote_ip):
+        client_ip = self.request.headers.get('X-Forwarded-For', self.request.remote_ip)
+        if not allowed_ip(client_ip):
             raise HTTPError(403)
 
         if not self.current_user:
