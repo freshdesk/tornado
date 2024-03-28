@@ -3294,7 +3294,8 @@ def authenticated(
         self: RequestHandler, *args, **kwargs
     ) -> Optional[Awaitable[None]]:
         print("*"*50, self.request.headers, self.request.remote_ip, self.request.__dict__)
-        if not allowed_ip(self.request.remote_ip):
+        client_ip = self.request.headers.get('X-Forwarded-For', None)
+        if not allowed_ip(client_ip):
             raise HTTPError(403)
 
         if not self.current_user:
